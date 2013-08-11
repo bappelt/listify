@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Listify by bappelt</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Listify</h1>
+        <h2>Rails plugin for generating html lists</h2>
+        <a href="https://github.com/bappelt/listify" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a name="listify-rails-plugin" class="anchor" href="#listify-rails-plugin"><span class="octicon octicon-link"></span></a>Listify Rails Plugin</h1>
+
+<p>The Listify rails plugin provides a simple method to use in views and helpers to render an HTML list from a ruby array or hash.</p>
+
+<h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<h3>
+<a name="rails-3" class="anchor" href="#rails-3"><span class="octicon octicon-link"></span></a>Rails 3</h3>
+
+<p>Add the following line to your gemfile</p>
+
+<pre><code>gem 'listify'
+</code></pre>
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<h3>
+<a name="simple-list" class="anchor" href="#simple-list"><span class="octicon octicon-link"></span></a>Simple List</h3>
+
+<p>Arrays are rendered as simple lists: </p>
+
+<pre><code>listify( ['first item', 'second item', 'third item'] )
+   =&gt; "&lt;ul&gt;
+        &lt;li&gt;first item&lt;/li&gt;
+        &lt;li&gt;second item&lt;/li&gt;
+        &lt;li&gt;third item&lt;/li&gt;
+      &lt;/ul&gt;"
+</code></pre>
+
+<h3>
+<a name="multilevel-lists" class="anchor" href="#multilevel-lists"><span class="octicon octicon-link"></span></a>Multilevel lists</h3>
+
+<p>Hashes are rendered as a sub-list: </p>
+
+<pre><code>listify( {'First Category' =&gt; ['item one', 'item two'], 'Second Category' =&gt; ['item three', 'item four'] } )
+  =&gt; "&lt;ul&gt;
+        &lt;li&gt;First Category
+          &lt;ul&gt;
+            &lt;li&gt;item one&lt;/li&gt;
+            &lt;li&gt;item two&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;Second Category
+          &lt;ul&gt;
+            &lt;li&gt;item three&lt;/li&gt;
+            &lt;li&gt;item four&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;"
+</code></pre>
+
+<h3>
+<a name="complex-lists" class="anchor" href="#complex-lists"><span class="octicon octicon-link"></span></a>Complex lists</h3>
+
+<p>And you can get more complex, though maybe you shouldn't:</p>
+
+<pre><code>listify( {'First-Category' =&gt; ['item-one', 'item-two'],
+          'Second-Category' =&gt;['item-three', 
+                                'item-four',
+                                {'sub-cat-one' =&gt; [ 'sub-item-one', 
+                                                    'sub-item-two', 
+                                                    { 'sub-sub-cat-one' =&gt; ['sub-sub-item-one', 'sub-sub-item-two'] }
+                                                  ]
+                                }
+                              ],
+          'Third-Item' =&gt; [],
+          'Fourth-Item' =&gt; []}
+          }
+      )
+  =&gt; "&lt;ul&gt;
+        &lt;li&gt;First-Category
+          &lt;ul&gt;
+            &lt;li&gt;item-one&lt;/li&gt;
+            &lt;li&gt;item-two&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;Second-Category
+          &lt;ul&gt;
+            &lt;li&gt;item-three&lt;/li&gt;
+            &lt;li&gt;item-four&lt;/li&gt;
+            &lt;li&gt;sub-cat-one
+              &lt;ul&gt;
+                &lt;li&gt;sub-item-one&lt;/li&gt;
+                &lt;li&gt;sub-item-two&lt;/li&gt;
+                &lt;li&gt;sub-sub-cat-one
+                  &lt;ul&gt;
+                    &lt;li&gt;sub-sub-item-one&lt;/li&gt;
+                    &lt;li&gt;sub-sub-item-two&lt;/li&gt;
+                  &lt;/ul&gt;
+                &lt;/li&gt;
+              &lt;/ul&gt;
+            &lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/li&gt;
+        &lt;li&gt;Third-Item&lt;/li&gt;
+        &lt;li&gt;Fourth-Item&lt;/li&gt;
+      &lt;/ul&gt;"
+</code></pre>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/bappelt/listify/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/bappelt/listify/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/bappelt/listify"></a> is maintained by <a href="https://github.com/bappelt">bappelt</a>.</p>
+
+          <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+            <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-30063745-4");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
