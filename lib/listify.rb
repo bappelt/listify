@@ -42,3 +42,5 @@ module Listify
     end
   end
 end
+
+ActionView::Base.send(:include, Listify::Helper) if defined?(ActionView::Base)
