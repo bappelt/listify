@@ -9,9 +9,9 @@ Gem::Specification.new do |s|
   s.version     = Listify::VERSION
   s.authors     = ["Byron Appelt "]
   s.email       = ["byron.appelt@gmail.com"]
-  s.homepage    = ""
-  s.summary     = "Summary of Listify."
-  s.description = "Description of Listify."
+  s.homepage    = "http://bappelt.github.io/listify"
+  s.summary     = "HTML list generator plugin for Rails"
+  s.description = "Rails plugin that generates HTML lists from ruby array and hash objects"
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
 
