@@ -7,7 +7,7 @@ describe WidgetController do
 
     it "should render an inline template" do
       render :inline => "<%= who%> rocks!", :locals => {:who => "Byron"}
-      rendered.should == "Byron rocks!"
+      rendered.should == "Byron sucks!"
     end
 
     it "should render a list", :type => :view do
