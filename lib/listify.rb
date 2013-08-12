@@ -2,6 +2,34 @@ module Listify
 
   module Helper
 
+    # Generate an HTML list from a ruby collection
+    # @param [Array, Hash{sublist_name => sublist[Array, Hash]}] collection the collection to render as a list
+    # @return ActiveSupport::SafeBuffer
+    #
+    # @example Simple List
+    #   listify( ['first item', 'second item', 'third item'] )
+    #   => "<ul>
+    #        <li>first item</li>
+    #        <li>second item</li>
+    #        <li>third item</li>
+    #      </ul>"
+    #
+    # @example Nested List
+    #   listify( {'First Category' => ['item one', 'item two'], 'Second Category' => ['item three', 'item four'] } )
+    #     => "<ul>
+    #           <li>First Category
+    #             <ul>
+    #               <li>item one</li>
+    #               <li>item two</li>
+    #             </ul>
+    #           </li>
+    #         <li>Second Category
+    #           <ul>
+    #             <li>item three</li>
+    #             <li>item four</li>
+    #           </ul>
+    #         </li>
+    #       </ul>"
     def listify(collection)
       content_tag :ul do
         concat list_items_for(collection)
