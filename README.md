@@ -1,4 +1,6 @@
 #Listify Rails Plugin
+[![Build Status](https://travis-ci.org/bappelt/listify.png)](https://travis-ci.org/bappelt/listify)
+[![Code Climate](https://codeclimate.com/github/bappelt/listify.png)](https://codeclimate.com/github/bappelt/listify)
 
 The Listify rails plugin provides a simple method to use in views and helpers to render an HTML list from a ruby array or hash.
 
@@ -104,5 +106,3 @@ listify( {'First-Category' => ['item-one', 'item-two'],
         <li>Fourth-Item</li>
       </ul>"
 ```
-
-[![Code Climate](https://codeclimate.com/github/bappelt/listify.png)](https://codeclimate.com/github/bappelt/listify)
