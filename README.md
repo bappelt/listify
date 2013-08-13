@@ -1,4 +1,5 @@
 #Listify Rails Plugin
+[![Gem Version](https://badge.fury.io/rb/listify.png)](http://badge.fury.io/rb/listify)
 [![Build Status](https://travis-ci.org/bappelt/listify.png)](https://travis-ci.org/bappelt/listify)
 [![Code Climate](https://codeclimate.com/github/bappelt/listify.png)](https://codeclimate.com/github/bappelt/listify)
 
