@@ -23,7 +23,20 @@ listify( ['first item', 'second item', 'third item'] )
         <li>second item</li>
         <li>third item</li>
       </ul>"
-```   
+```
+
+###HTML Attributes
+
+  Attributes can be specified for the outer tag
+  ```
+  listify( ['first item', 'second item', 'third item'], class: 'todo-list' )
+     => "<ul class="todo-list">
+          <li>first item</li>
+          <li>second item</li>
+          <li>third item</li>
+        </ul>"
+  ```
+
 ###Multilevel lists
 
 Hashes are rendered as a sub-list: 

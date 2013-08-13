@@ -30,9 +30,9 @@ module Listify
     #           </ul>
     #         </li>
     #       </ul>"
-    def listify(collection)
-      content_tag :ul do
-        concat list_items_for(collection)
+    def listify(collection, options = {})
+      content_tag :ul, options do
+        list_items_for(collection)
       end
     end
 

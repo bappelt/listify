@@ -11,21 +11,21 @@ describe WidgetController do
     end
 
     it "should render a list", :type => :view do
-      render :inline => "<%= listify( collection ) %>", :locals => {:collection => ['first', 'second', 'third']}
+      render :inline => "<%= listify( collection, {class: 'parts-list'} ) %>", :locals => {:collection => ['first', 'second', 'third']}
       expected = <<-DOC
-        <ul>
+        <ul class=\"parts-list\">
           <li>first</li>
           <li>second</li>
           <li>third</li>
         </ul>
       DOC
-      rendered.should == expected.gsub(/\s+/, "")
+      rendered.should == expected.gsub(/\n/, "").gsub(/\s+</, '<')
     end
 
     it "should render a nested list", :type => :view do
-      render :inline => "<%= listify( collection ) %>", :locals => {:collection => {'First-Category' => ['item-one', 'item-two'], 'Second-Category' => ['item-three', 'item-four']}}
+      render :inline => "<%= listify( collection, {class: 'shopping-list'} ) %>", :locals => {:collection => {'First-Category' => ['item-one', 'item-two'], 'Second-Category' => ['item-three', 'item-four']}}
       expected = <<-DOC
-                  <ul>
+                  <ul class=\"shopping-list\">
                     <li>First-Category
                       <ul>
                         <li>item-one</li>
@@ -40,7 +40,7 @@ describe WidgetController do
                     </li>
                   </ul>
       DOC
-      rendered.should == expected.gsub(/\s+/, "")
+      rendered.should == expected.gsub(/\n/, "").gsub(/\s+</, '<')
     end
 
     it "should render a partially nested list", :type => :view do
