@@ -91,3 +91,5 @@ listify( {'First-Category' => ['item-one', 'item-two'],
         <li>Fourth-Item</li>
       </ul>"
 ```
+
+[![Code Climate](https://codeclimate.com/github/bappelt/listify.png)](https://codeclimate.com/github/bappelt/listify)
