@@ -1,17 +1,14 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV["RAILS_ENV"] ||= 'test'
+
+require 'simplecov'
+SimpleCov.start do
+   add_filter '/dummy/'
+end
+
+
 require File.expand_path("../../spec/dummy/config/environment", __FILE__)
 require 'rspec/rails'
-require 'rspec/autorun'
-require 'active_support'
-require 'active_support/deprecation'
-require 'action_view'
-require 'rspec/rails/adapters'
-require 'rspec/rails/example/rails_example_group'
-#require 'rspec/rails/matchers/render_template'
-require 'rspec/rails/example/view_example_group'
-require 'rspec/rails/mocks'
-require 'rspec/rails/view_rendering'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
