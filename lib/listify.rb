@@ -1,3 +1,5 @@
+require_relative 'columnizer'
+
 module Listify
 
   module Helper
