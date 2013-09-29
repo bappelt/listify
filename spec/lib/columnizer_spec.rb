@@ -2,6 +2,11 @@ require 'spec_helper'
 
 describe 'Columnizer' do
 
+  it 'should throw exception for lists nested more then 2 deep' do
+    list = { cat1: %w[one two], cat2: [ 'three', {subcat1: %w[three four]} ] }
+    expect {  Columnizer.new(list, 2) }.to raise_error(RuntimeError, /not supported/)
+  end
+
   it 'should split an array evenly into an evenly divisible number of columns' do
     list = %w[first second third fourth fifth sixth]
     columnizer = Columnizer.new(list, 3)

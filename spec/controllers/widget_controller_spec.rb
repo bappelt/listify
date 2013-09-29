@@ -240,5 +240,13 @@ describe WidgetController do
       rendered.should == expected.gsub(/\n/, "").gsub(/\s+</, '<')
     end
 
+    it "should error for deep lists" do
+      list = { cat1: %w[one two], cat2: [ 'three', {subcat1: %w[three four]} ] }
+      expect {
+        render :inline => "<%= listify( collection, {class: 'parts-list', columns: 2} ) %>", :locals => {:collection => list }
+      }.to raise_error(ActionView::Template::Error, /not supported/)
+
+    end
+
   end
 end
