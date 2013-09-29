@@ -33,9 +33,31 @@ module Listify
     #         </li>
     #       </ul>"
     def listify(collection, options = {})
-      content_tag :ul, options do
-        list_items_for(collection)
+      number_of_columns = options.fetch(:columns, 1)
+
+      if number_of_columns > 1
+        options.delete(:columns)
+        columnizer = Columnizer.new(collection, number_of_columns)
+
+        elements = []
+        (1..number_of_columns).each do |column|
+          items_for_column = columnizer.items_for_column(column)
+          next if items_for_column.empty?
+          column_element = content_tag :ul, options do
+            list_items_for(items_for_column)
+          end
+          elements << column_element
+        end
+
+
+        return elements.inject(:+)
+
+      else
+        content_tag :ul, options do
+          list_items_for(collection)
+        end
       end
+
     end
 
     private
