@@ -3,7 +3,7 @@ ActionView::Base.send(:include, Listify::Helper)
 
 describe WidgetController do
 
-  describe "GET index", :type => :view do
+  describe "Single Column Lists", :type => :view do
 
     it "should render an inline template" do
       render :inline => "<%= who%> rocks!", :locals => {:who => "Byron"}
@@ -144,5 +144,101 @@ describe WidgetController do
       DOC
       rendered.should == expected.gsub(/\s+/, "")
     end
+  end
+
+  describe "Multiple Column Lists", :type => :view do
+
+    it "should render a list in multiple equal columns" do
+      render :inline => "<%= listify( collection, {class: 'parts-list', columns: 2} ) %>", :locals => {:collection => ['first', 'second', 'third', 'fourth']}
+      expected = <<-DOC
+                 <ul class=\"parts-list\">
+                   <li>first</li>
+                   <li>second</li>
+                 </ul>
+                 <ul class=\"parts-list\">
+                   <li>third</li>
+                   <li>fourth</li>
+                 </ul>
+      DOC
+      rendered.should == expected.gsub(/\n/, "").gsub(/\s+</, '<')
+    end
+
+    it "should render a list in multiple unequal columns" do
+      render :inline => "<%= listify( collection, {class: 'parts-list', columns: 2} ) %>", :locals => {:collection => ['first', 'second', 'third', 'fourth', 'fifth']}
+      expected = <<-DOC
+                     <ul class=\"parts-list\">
+                       <li>first</li>
+                       <li>second</li>
+                     </ul>
+                     <ul class=\"parts-list\">
+                       <li>third</li>
+                       <li>fourth</li>
+                       <li>fifth</li>
+                     </ul>
+      DOC
+      rendered.should == expected.gsub(/\n/, "").gsub(/\s+</, '<')
+    end
+
+    it "should render a nested list in multiple equal columns" do
+      render :inline => "<%= listify( collection, {class: 'shopping-list', columns: 2} ) %>", :locals => {:collection => {'First-Category' => ['item-one', 'item-two'], 'Second-Category' => ['item-three', 'item-four']}}
+      expected = <<-DOC
+                                <ul class=\"shopping-list\">
+                                  <li>First-Category
+                                    <ul>
+                                      <li>item-one</li>
+                                      <li>item-two</li>
+                                    </ul>
+                                  </li>
+                                </ul>
+                                <ul class=\"shopping-list\">
+                                  <li>Second-Category
+                                    <ul>
+                                      <li>item-three</li>
+                                      <li>item-four</li>
+                                    </ul>
+                                  </li>
+                                </ul>
+      DOC
+      rendered.should == expected.gsub(/\n/, "").gsub(/\s+</, '<')
+    end
+
+    it "should render a nested list in multiple unequal columns" do
+      render :inline => "<%= listify( collection, {class: 'shopping-list', columns: 2} ) %>",
+             :locals => {:collection => {'First-Category' => ['item-one', 'item-two'], 'Second-Category' => ['item-three', 'item-four'], 'Third-Category' => []}}
+      expected = <<-DOC
+                                <ul class=\"shopping-list\">
+                                  <li>First-Category
+                                    <ul>
+                                      <li>item-one</li>
+                                      <li>item-two</li>
+                                    </ul>
+                                  </li>
+                                </ul>
+                                <ul class=\"shopping-list\">
+                                  <li>Second-Category
+                                    <ul>
+                                      <li>item-three</li>
+                                      <li>item-four</li>
+                                    </ul>
+                                  </li>
+                                  <li>Third-Category</li>
+                                </ul>
+      DOC
+      rendered.should == expected.gsub(/\n/, "").gsub(/\s+</, '<')
+    end
+
+    it "should render a list with empty columns when there is not enough items" do
+      render :inline => "<%= listify( collection, {class: 'parts-list', columns: 3} ) %>", :locals => {:collection => ['first', 'second']}
+      expected = <<-DOC
+                       <ul class=\"parts-list\">
+                         <li>first</li>
+                       </ul>
+                       <ul class=\"parts-list\">
+                         <li>second</li>
+                       </ul>
+      DOC
+      rendered.should == expected.gsub(/\n/, "").gsub(/\s+</, '<')
+    end
+
   end
 end
