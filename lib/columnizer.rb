@@ -1,7 +1,7 @@
 class Columnizer
 
   def initialize(list, number_of_columns)
-    @list = list
+    @list = Columnizer.convert_to_array(list)
     @column_count = number_of_columns
     @items_by_column = []
     columnize!
@@ -50,38 +50,50 @@ class Columnizer
 
   def self.truncate_list(list, range)
 
-    truncated_list = []
-    if list.is_a?(Hash)
-      keys = list.keys
-      keys.each do |key|
-        list[key.to_s] = list.delete(key)
-      end
-      list.each {|key, value| truncated_list << [key.dup, value] }
-    else
-      truncated_list = list
-    end
+    list = convert_to_array(list)
 
     first_index, last_index = range.begin, range.end
+    first_item, last_item = list.flatten[first_index], list.flatten[last_index]
 
-    first_item = truncated_list.flatten[first_index]
-    last_item = truncated_list.flatten[last_index]
+    list.each { |o| o.extend(IsOrIncludes) }
+    list.flatten(1).each { |o| o.extend(IsOrIncludes) }
+    list.flatten(2).each { |o| o.extend(IsOrIncludes) }
 
-    truncated_list.each { |o| o.extend(IsOrIncludes) }
-    truncated_list.flatten(1).each { |o| o.extend(IsOrIncludes) }
-    truncated_list.flatten(2).each { |o| o.extend(IsOrIncludes) }
+    first_item_index = list.index { |o| o.is_or_includes?(first_item) }
+    last_item_index = list.index { |o| o.is_or_includes?(last_item) }
 
-    first_item_index = truncated_list.index { |o| o.is_or_includes?(first_item) }
-    last_item_index = truncated_list.index { |o| o.is_or_includes?(last_item) }
-
-    last_item_container = truncated_list[last_item_index]
+    last_item_container = list[last_item_index]
     if last_item_container.is_a?(Array)
        unless last_item_container[1].eql?(last_item) || last_item_container[1].last.eql?(last_item) || last_item_container[1].empty?
           last_item_index -= 1
        end
     end
 
-    truncated_list[first_item_index..last_item_index]
+    list[first_item_index..last_item_index]
 
+  end
+
+  def self.convert_to_array(list)
+    truncated_list = []
+    if list.respond_to?(:keys)
+      keys = list.keys
+      keys.each do |key|
+        list[key.to_s] = list.delete(key)
+      end
+      list.each do |key, value|
+        validate_depth(value)
+        truncated_list << [key.dup, value]
+      end
+    else
+      truncated_list = list
+    end
+    truncated_list
+  end
+
+  def self.validate_depth(value)
+    if value.respond_to?(:each) then
+      value.each { |item| raise "Columns not supported for lists nested more than one level" if item.respond_to?(:keys) }
+    end
   end
 
 
