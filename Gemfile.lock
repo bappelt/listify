@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    listify (0.1.0)
+    listify (0.2.0)
       rails (~> 3.2.14)
 
 GEM
