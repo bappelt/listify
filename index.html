@@ -61,6 +61,19 @@
 </code></pre>
 
 <h3>
+<a name="html-attributes" class="anchor" href="#html-attributes"><span class="octicon octicon-link"></span></a>HTML Attributes</h3>
+
+<p>Attributes can be specified for the outer tag</p>
+
+<pre><code>  listify( ['first item', 'second item', 'third item'], class: 'todo-list' )
+     =&gt; "&lt;ul class="todo-list"&gt;
+          &lt;li&gt;first item&lt;/li&gt;
+          &lt;li&gt;second item&lt;/li&gt;
+          &lt;li&gt;third item&lt;/li&gt;
+        &lt;/ul&gt;"
+</code></pre>
+
+<h3>
 <a name="multilevel-lists" class="anchor" href="#multilevel-lists"><span class="octicon octicon-link"></span></a>Multilevel lists</h3>
 
 <p>Hashes are rendered as a sub-list: </p>
@@ -80,6 +93,27 @@
           &lt;/ul&gt;
         &lt;/li&gt;
       &lt;/ul&gt;"
+</code></pre>
+
+<h3>
+<a name="multi-column-lists" class="anchor" href="#multi-column-lists"><span class="octicon octicon-link"></span></a>Multi-Column lists</h3>
+
+<p>If you specify a number of columns &gt; 1, the list will be broken up into multiple unordered lists intended for use as separate columns</p>
+
+<pre><code>listify( %w[first second third fourth fifth sixth seventh], columns: 3 )
+ =&gt; "&lt;ul&gt;
+       &lt;li&gt;first&lt;/li&gt;
+       &lt;li&gt;second&lt;/li&gt;
+     &lt;/ul&gt;
+     &lt;ul&gt;
+       &lt;li&gt;third&lt;/li&gt;
+       &lt;li&gt;fourth&lt;/li&gt;
+     &lt;/ul&gt;
+     &lt;ul&gt;
+       &lt;li&gt;fifth&lt;/li&gt;
+       &lt;li&gt;sixth&lt;/li&gt;
+       &lt;li&gt;seventh&lt;/li&gt;
+     &lt;/ul&gt;"
 </code></pre>
 
 <h3>
