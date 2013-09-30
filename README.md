@@ -62,6 +62,26 @@ listify( {'First Category' => ['item one', 'item two'], 'Second Category' => ['i
       </ul>"
 ```
 
+###Multi-Column lists
+
+If you specify a number of columns > 1, the list will be broken up into multiple unordered lists intended for use as separate columns
+```
+listify( %w[first second third fourth fifth sixth seventh], columns: 3 )
+ => "<ul>
+       <li>first</li>
+       <li>second</li>
+     </ul>
+     <ul>
+       <li>third</li>
+       <li>fourth</li>
+     </ul>
+     <ul>
+       <li>fifth</li>
+       <li>sixth</li>
+       <li>seventh</li>
+     </ul>"
+```
+
 ###Complex lists
 
 And you can get more complex, though maybe you shouldn't:

@@ -6,11 +6,14 @@ module Listify
 
     # Generate an HTML list from a ruby collection
     # @param [Array, Hash{sublist_name => sublist[Array, Hash]}] collection the collection to render as a list
+    # @param [Hash] options
+    # @option options [String] :class HTML class to apply to the <ul> elements
+    # @option options [Integer] :columns (1) When specified, break list into multiple lists. Breaks will occur at top level only if list is nested. Not supported for lists nested more than one level deep.
     # @return ActiveSupport::SafeBuffer
     #
     # @example Simple List
-    #   listify( ['first item', 'second item', 'third item'] )
-    #   => "<ul>
+    #   listify( ['first item', 'second item', 'third item'], class: 'parts-list' )
+    #   => "<ul class='parts-list'>
     #        <li>first item</li>
     #        <li>second item</li>
     #        <li>third item</li>
@@ -32,6 +35,18 @@ module Listify
     #           </ul>
     #         </li>
     #       </ul>"
+    #
+    # @example Multiple Column List
+    #   listify( ['first item', 'second item', 'third item', 'fourth item', 'fifth item'], columns: 2 )
+    #   => "<ul>
+    #        <li>first item</li>
+    #        <li>second item</li>
+    #      </ul>
+    #      <ul>
+    #        <li>third item</li>
+    #        <li>fourth item</li>
+    #        <li>fifth item</li>
+    #      </ul>"
     def listify(collection, options = {})
       number_of_columns = options.fetch(:columns, 1)
 
