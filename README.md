@@ -5,7 +5,7 @@
 [![Code Climate](https://codeclimate.com/github/bappelt/listify.png)](https://codeclimate.com/github/bappelt/listify)
 [![Dependency Status](https://gemnasium.com/bappelt/listify.png)](https://gemnasium.com/bappelt/listify)
 
-The Listify rails plugin provides a simple method to use in views and helpers to render an HTML list from a ruby array or hash.
+The Listify rails plugin provides a simple method to use in views and helpers to render an HTML list from a ruby array or hash. 
 
 ##Installation
 
